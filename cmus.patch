@@ -1,0 +1,682 @@
+Index: Makefile
+===================================================================
+RCS file: /cvs/ports/audio/cmus/Makefile,v
+retrieving revision 1.9
+diff -u -p -r1.9 Makefile
+--- Makefile	18 Jul 2015 14:33:49 -0000	1.9
++++ Makefile	10 Oct 2015 12:57:49 -0000
+@@ -1,80 +1,87 @@
+ # $OpenBSD: Makefile,v 1.9 2015/07/18 14:33:49 jasper Exp $
+ 
++SHARED_ONLY=		Yes
++
+ COMMENT-main=		ncurses-based music player
+-COMMENT-flac=		FLAC input plugin for cmus
+-COMMENT-wavpack=	Wavpack input plugin for cmus
++COMMENT-ffmpeg=		ffmpeg input plugin for cmus (.aac, .mp4...)
+ 
+-V=			2.5.0
+-DISTNAME=		cmus-v$(V)
+-PKGNAME-main=		cmus-$(V)
+-PKGNAME-flac=		cmus-flac-$(V)
+-PKGNAME-wavpack=	cmus-wavpack-$(V)
++V=			2.7.1
++DISTNAME=		cmus-${V}
++PKGNAME-main=		${PKGNAME}
++PKGNAME-ffmpeg=		cmus-ffmpeg-${V}
++
++GH_ACCOUNT=		cmus
++GH_PROJECT=		cmus
++GH_TAGNAME=		v${V}
+ 
+ CATEGORIES=		audio
+-
+ HOMEPAGE=		http://cmus.sourceforge.net/
++
+ MAINTAINER=		Donovan Watteau <tsoomi@gmail.com>
+ 
+ # GPLv2+
+ PERMIT_PACKAGE_CDROM=	Yes
+ 
+-EXTRACT_SUFX=		.tar.bz2
+-MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=cmus/}
+-
+-SHARED_ONLY=		Yes
+-MULTI_PACKAGES=		-main -flac -wavpack
++MULTI_PACKAGES=		-main -ffmpeg
+ 
+ MODULES=		converters/libiconv
+ 
+-WANTLIB-main=		c cdio cdio_cdda cue m mad>=2 ncursesw pthread sndio
+-WANTLIB-main+=		${MODLIBICONV_WANTLIB}
++WANTLIB-main+=		c cdio cdio_cdda cue discid FLAC>=5 m mad>=2 ncursesw
++WANTLIB-main+=		ogg opusfile pthread sndio wavpack ${MODLIBICONV_WANTLIB}
+ 
+-LIB_DEPENDS=		audio/libcdio audio/libcue audio/libmad
+-
+-LIB_DEPENDS-flac=	audio/flac audio/libogg
+-RUN_DEPENDS-flac=	audio/cmus
+-WANTLIB-flac=		FLAC>=5 ogg m
+-LIB_DEPENDS-wavpack=	audio/wavpack ${MODLIBICONV_LIB_DEPENDS}
+-RUN_DEPENDS-wavpack=	audio/cmus
+-WANTLIB-wavpack=	wavpack m ${MODLIBICONV_WANTLIB}
++LIB_DEPENDS-main=	audio/flac \
++			audio/libcdio \
++			audio/libcue \
++			audio/libdiscid \
++			audio/libmad \
++			audio/libogg \
++			audio/opusfile \
++			audio/wavpack
++
++WANTLIB-ffmpeg=		avformat swresample
++LIB_DEPENDS-ffmpeg=	graphics/ffmpeg
++RUN_DEPENDS-ffmpeg=	audio/cmus
+ 
+ USE_GMAKE=		Yes
+ 
+ CONFIGURE_STYLE=	simple
+ CONFIGURE_ENV=		HOSTCC="${CC}" HOSTLD="${CC}" HOST_CFLAGS="${CFLAGS}"
++CFLAGS+=		-Wno-system-headers
+ # Note: We're explicitly disabling CONFIG_CDDB as it gets undef'd in cdio.c
+ CONFIGURE_ARGS=		prefix=${PREFIX} \
+ 			exampledir=${PREFIX}/share/examples/cmus \
+ 			mandir=${PREFIX}/man \
+ 			CONFIG_AAC=n \
+-			CONFIG_FFMPEG=n \
++			CONFIG_ALSA=n \
++			CONFIG_AO=n \
++			CONFIG_ARTS=n \
++			CONFIG_CDDB=n \
++			CONFIG_DISCID=y \
++			CONFIG_FFMPEG=y \
++			CONFIG_JACK=n \
+ 			CONFIG_MODPLUG=n \
+ 			CONFIG_MP4=n \
+ 			CONFIG_MPC=n \
+ 			CONFIG_OSS=n \
+-			CONFIG_SUN=n \
+-			CONFIG_AO=n \
+-			CONFIG_ARTS=n \
+ 			CONFIG_PULSE=n \
+-			CONFIG_ALSA=n \
+ 			CONFIG_ROAR=n \
++			CONFIG_SAMPLERATE=n \
+ 			CONFIG_SNDIO=y \
+-			CONFIG_DISCID=n \
+-			CONFIG_CDDB=n
++			CONFIG_SUN=n \
++			CONFIG_VTX=n
+ 
+ .if ${MACHINE_ARCH} == "arm"
+ CONFIGURE_ARGS+=	CONFIG_TREMOR=y
+-LIB_DEPENDS+=		audio/tremor
++LIB_DEPENDS-main+=	audio/tremor
+ WANTLIB-main+=		vorbisidec>=1
+ .else
+-LIB_DEPENDS+=		audio/libvorbis
+-WANTLIB-main+=		ogg vorbis>=0 vorbisfile>=1
++LIB_DEPENDS-main+=	audio/libvorbis
++WANTLIB-main+=		vorbis>=0 vorbisfile>=1
+ .endif
+ 
+ NO_TEST=		Yes
+ 
+-post-patch:
+-	@cp ${FILESDIR}/sndio.c ${WRKSRC}
++pre-configure:
+ 	sed -i s,/usr,${LOCALBASE}, ${WRKSRC}/Doc/cmus.txt
+ 	sed -i s,doc/cmus/examples,examples/cmus, ${WRKSRC}/Doc/cmus.txt
+ 
+Index: distinfo
+===================================================================
+RCS file: /cvs/ports/audio/cmus/distinfo,v
+retrieving revision 1.3
+diff -u -p -r1.3 distinfo
+--- distinfo	27 Dec 2012 12:02:33 -0000	1.3
++++ distinfo	10 Oct 2015 12:57:49 -0000
+@@ -1,2 +1,2 @@
+-SHA256 (cmus-v2.5.0.tar.bz2) = ICH6tkCIiY1i0UOVJew0XiGfWNkanpM9yF6E7aIcjd8=
+-SIZE (cmus-v2.5.0.tar.bz2) = 224675
++SHA256 (cmus-2.7.1.tar.gz) = gXmnqEPSV921hfTGVZmES8DlFv6F6X9vh6fOreTrUWU=
++SIZE (cmus-2.7.1.tar.gz) = 296818
+Index: files/sndio.c
+===================================================================
+RCS file: files/sndio.c
+diff -N files/sndio.c
+--- files/sndio.c	27 Dec 2012 12:02:33 -0000	1.3
++++ /dev/null	1 Jan 1970 00:00:00 -0000
+@@ -1,261 +0,0 @@
+-/*
+- * Copyright (C) 2011 Donovan "Tsomi" Watteau <tsoomi@gmail.com>
+- *
+- * Based on Thomas Pfaff's work for XMMS, and some suggestions from
+- * Alexandre Ratchov.
+- *
+- * This program is free software: you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation, either version 2 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+- */
+-
+-#include <sys/types.h>
+-#include <sys/ioctl.h>
+-#include <sys/audioio.h>
+-#include <sys/stat.h>
+-#include <errno.h>
+-#include <fcntl.h>
+-#include <string.h>
+-#include <unistd.h>
+-#include <sndio.h>
+-
+-#include "op.h"
+-#include "mixer.h"
+-#include "sf.h"
+-#include "xmalloc.h"
+-
+-static sample_format_t sndio_sf;
+-static struct sio_par par;
+-static struct sio_hdl *hdl = NULL;
+-static int sndio_volume = 100;
+-static int sndio_paused;
+-
+-static int sndio_mixer_set_volume(int l, int r)
+-{
+-	sndio_volume = l > r ? l : r;
+-
+-	if (hdl != NULL)
+-		sio_setvol(hdl, sndio_volume * SIO_MAXVOL / 100);
+-
+-	return 0;
+-}
+-
+-static int sndio_mixer_get_volume(int *l, int *r)
+-{
+-	*l = *r = sndio_volume;
+-
+-	return 0;
+-}
+-
+-static int sndio_set_sf(sample_format_t sf)
+-{
+-	struct sio_par apar;
+-
+-	sndio_sf = sf;
+-
+-	sio_initpar(&par);
+-
+-	par.pchan = sf_get_channels(sndio_sf);
+-	par.rate = sf_get_rate(sndio_sf);
+-	sndio_paused = 0;
+-
+-	if (sf_get_signed(sndio_sf))
+-		par.sig = 1;
+-	else
+-		par.sig = 0;
+-
+-	if (sf_get_bigendian(sndio_sf))
+-		par.le = 0;
+-	else
+-		par.le = 1;
+-
+-	switch (sf_get_bits(sndio_sf)) {
+-	case 16:
+-		par.bits = 16;
+-		break;
+-	case 8:
+-		par.bits = 8;
+-		break;
+-	default:
+-		return -1;
+-	}
+-
+-	par.appbufsz = par.rate * 300 / 1000;
+-	apar = par;
+-
+-	if (!sio_setpar(hdl, &par))
+-		return -1;
+-
+-	if (!sio_getpar(hdl, &par))
+-		return -1;
+-
+-	if (apar.rate != par.rate || apar.pchan != par.pchan ||
+-	    apar.bits != par.bits || (par.bits > 8 && apar.le != par.le) ||
+-	    apar.sig != par.sig)
+-		return -1;
+-
+-	sndio_mixer_set_volume(sndio_volume, sndio_volume);
+-
+-	if (!sio_start(hdl))
+-		return -1;
+-
+-	return 0;
+-}
+-
+-static int sndio_init(void)
+-{
+-	return 0;
+-}
+-
+-static int sndio_exit(void)
+-{
+-	return 0;
+-}
+-
+-static int sndio_close(void)
+-{
+-	if (hdl != NULL) {
+-		sio_close(hdl);
+-		hdl = NULL;
+-	}
+-
+-	return 0;
+-}
+-
+-static int sndio_open(sample_format_t sf, const channel_position_t *channel_map)
+-{
+-	hdl = sio_open(NULL, SIO_PLAY, 0);
+-	if (hdl == NULL)
+-		return -1;
+-
+-	if (sndio_set_sf(sf) == -1) {
+-		sndio_close();
+-		return -1;
+-	}
+-
+-	return 0;
+-}
+-
+-static int sndio_write(const char *buf, int cnt)
+-{
+-	size_t rc;
+-
+-	rc = sio_write(hdl, buf, cnt);
+-	if (rc == 0)
+-		return -1;
+-
+-	return rc;
+-}
+-
+-static int op_sndio_set_option(int key, const char *val)
+-{
+-	return -OP_ERROR_NOT_OPTION;
+-}
+-
+-static int op_sndio_get_option(int key, char **val)
+-{
+-	return -OP_ERROR_NOT_OPTION;
+-}
+-
+-static int sndio_pause(void)
+-{
+-	if (!sndio_paused) {
+-		sio_stop(hdl);
+-		sndio_paused = 1;
+-	}
+-
+-	return 0;
+-}
+-
+-static int sndio_unpause(void)
+-{
+-	if (sndio_paused) {
+-		sio_start(hdl);
+-		sndio_paused = 0;
+-	}
+-
+-	return 0;
+-}
+-
+-static int sndio_buffer_space(void)
+-{
+-	/*
+-	 * Do as if there's always some space and let sio_write() block.
+-	 */
+-	return par.bufsz * par.bps * par.pchan;
+-}
+-
+-static int sndio_mixer_init(void)
+-{
+-	return OP_ERROR_SUCCESS;
+-}
+-
+-static int sndio_mixer_exit(void)
+-{
+-	return OP_ERROR_SUCCESS;
+-}
+-
+-static int sndio_mixer_open(int *volume_max)
+-{
+-	*volume_max = 100; 
+-
+-	return OP_ERROR_SUCCESS;
+-}
+-
+-static int sndio_mixer_close(void)
+-{
+-	return OP_ERROR_SUCCESS;
+-}
+-
+-static int sndio_mixer_set_option(int key, const char *val)
+-{
+-	return -OP_ERROR_NOT_OPTION;
+-}
+-
+-static int sndio_mixer_get_option(int key, char **val)
+-{
+-	return -OP_ERROR_NOT_OPTION;
+-}
+-
+-const struct output_plugin_ops op_pcm_ops = {
+-	.init = sndio_init,
+-	.exit = sndio_exit,
+-	.open = sndio_open,
+-	.close = sndio_close,
+-	.write = sndio_write,
+-	.pause = sndio_pause,
+-	.unpause = sndio_unpause,
+-	.buffer_space = sndio_buffer_space,
+-	.set_option = op_sndio_set_option,
+-	.get_option = op_sndio_get_option
+-};
+-
+-const struct mixer_plugin_ops op_mixer_ops = {
+-	.init = sndio_mixer_init,
+-	.exit = sndio_mixer_exit,
+-	.open = sndio_mixer_open,
+-	.close = sndio_mixer_close,
+-	.set_volume = sndio_mixer_set_volume,
+-	.get_volume = sndio_mixer_get_volume,
+-	.set_option = sndio_mixer_set_option,
+-	.get_option = sndio_mixer_get_option
+-};
+-
+-const char * const op_pcm_options[] = {
+-	NULL
+-};
+-
+-const char * const op_mixer_options[] = {
+-	NULL
+-};
+-
+-const int op_priority = 2;
+Index: patches/patch-Doc_cmus_txt
+===================================================================
+RCS file: patches/patch-Doc_cmus_txt
+diff -N patches/patch-Doc_cmus_txt
+--- patches/patch-Doc_cmus_txt	18 Sep 2011 13:27:53 -0000	1.1
++++ /dev/null	1 Jan 1970 00:00:00 -0000
+@@ -1,12 +0,0 @@
+-$OpenBSD: patch-Doc_cmus_txt,v 1.1 2011/09/18 13:27:53 landry Exp $
+---- Doc/cmus.txt.orig	Sun Jul 24 11:42:22 2011
+-+++ Doc/cmus.txt	Sun Sep  4 22:55:19 2011
+-@@ -860,7 +860,7 @@ id3_default_charset (ISO-8859-1)
+- lib_sort (artist album discnumber tracknumber title filename) [`Sort Keys`]
+- 	Sort keys for the sorted library view (2).
+- 
+--output_plugin [roar, pulse, alsa, arts, oss, sun]
+-+output_plugin [roar, pulse, alsa, arts, sndio, oss, sun]
+- 	Name of output plugin.
+- 
+- pl_sort () [`Sort Keys`]
+Index: patches/patch-Makefile
+===================================================================
+RCS file: /cvs/ports/audio/cmus/patches/patch-Makefile,v
+retrieving revision 1.1.1.1
+diff -u -p -r1.1.1.1 patch-Makefile
+--- patches/patch-Makefile	6 Sep 2011 07:10:56 -0000	1.1.1.1
++++ patches/patch-Makefile	10 Oct 2015 12:57:49 -0000
+@@ -1,37 +1,35 @@
+ $OpenBSD: patch-Makefile,v 1.1.1.1 2011/09/06 07:10:56 landry Exp $
+---- Makefile.orig	Thu May 26 20:47:33 2011
+-+++ Makefile	Mon Jul  4 16:23:00 2011
+-@@ -139,6 +139,7 @@ alsa-objs		:= alsa.lo mixer_alsa.lo
+- arts-objs		:= arts.lo
+- oss-objs		:= oss.lo mixer_oss.lo
+- sun-objs		:= sun.lo mixer_sun.lo
+-+sndio-objs		:= sndio.lo
+- ao-objs			:= ao.lo
+- waveout-objs		:= waveout.lo
+- roar-objs               := roar.lo
+-@@ -148,6 +149,7 @@ op-$(CONFIG_ALSA)	+= alsa.so
+- op-$(CONFIG_ARTS)	+= arts.so
+- op-$(CONFIG_OSS)	+= oss.so
+- op-$(CONFIG_SUN)	+= sun.so
+-+op-$(CONFIG_SNDIO)	+= sndio.so
+- op-$(CONFIG_AO)		+= ao.so
+- op-$(CONFIG_WAVEOUT)	+= waveout.so
+- op-$(CONFIG_ROAR)       += roar.so
+-@@ -157,6 +159,7 @@ $(alsa-objs): CFLAGS	+= $(ALSA_CFLAGS)
+- $(arts-objs): CFLAGS	+= $(ARTS_CFLAGS)
+- $(oss-objs):  CFLAGS	+= $(OSS_CFLAGS)
+- $(sun-objs):  CFLAGS	+= $(SUN_CFLAGS)
+-+$(sndio-objs): CFLAGS	+= $(SNDIO_CFLAGS)
+- $(ao-objs):   CFLAGS	+= $(AO_CFLAGS)
+- $(waveout-objs): CFLAGS += $(WAVEOUT_CFLAGS)
+- $(roar-objs): CFLAGS	+= $(ROAR_CFLAGS)
+-@@ -175,6 +178,9 @@ oss.so: $(oss-objs) $(libcmus-y)
++
++Fix install(1) usage.
++
++--- Makefile.orig	Mon Jul 13 12:00:56 2015
+++++ Makefile	Tue Jul 28 14:05:50 2015
++@@ -262,17 +262,21 @@ plugins: $(ip-y) $(op-y)
++ man: $(man1) $(man7)
+  
+- sun.so: $(sun-objs) $(libcmus-y)
+- 	$(call cmd,ld_dl,$(SUN_LIBS))
+-+
+-+sndio.so: $(sndio-objs) $(libcmus-y)
+-+	$(call cmd,ld_dl,$(SNDIO_LIBS))
++ install-main: main
++-	$(INSTALL) -m755 $(bindir) cmus cmus-remote
+++	${BSD_INSTALL_PROGRAM} cmus cmus-remote $(DESTDIR)$(bindir)
++ 
++ install-plugins: plugins
++-	$(INSTALL) -m755 $(libdir)/cmus/ip $(ip-y)
++-	$(INSTALL) -m755 $(libdir)/cmus/op $(op-y)
+++	${BSD_INSTALL_PROGRAM_DIR} $(DESTDIR)$(libdir)/cmus/ip
+++	${BSD_INSTALL_PROGRAM_DIR} $(DESTDIR)$(libdir)/cmus/op
+++	${BSD_INSTALL_PROGRAM} $(ip-y) $(DESTDIR)$(libdir)/cmus/ip
+++	${BSD_INSTALL_PROGRAM} $(op-y) $(DESTDIR)$(libdir)/cmus/op
++ 
++ install-data: man
++-	$(INSTALL) -m644 $(datadir)/cmus $(data)
++-	$(INSTALL) -m644 $(mandir)/man1 $(man1)
++-	$(INSTALL) -m644 $(mandir)/man7 $(man7)
++-	$(INSTALL) -m755 $(exampledir) cmus-status-display
+++	${BSD_INSTALL_DATA_DIR} $(DESTDIR)$(datadir)/cmus
+++	${BSD_INSTALL_DATA} $(data) $(DESTDIR)$(datadir)/cmus
+++	${BSD_INSTALL_MAN} $(man1) $(DESTDIR)$(mandir)/man1
+++	${BSD_INSTALL_MAN} $(man7) $(DESTDIR)$(mandir)/man7
+++	${BSD_INSTALL_DATA_DIR} $(DESTDIR)$(exampledir)
+++	${BSD_INSTALL_SCRIPT} cmus-status-display $(DESTDIR)$(exampledir)
++ 
++ install: all install-main install-plugins install-data
+  
+- ao.so: $(ao-objs) $(libcmus-y)
+- 	$(call cmd,ld_dl,$(AO_LIBS))
+Index: patches/patch-configure
+===================================================================
+RCS file: patches/patch-configure
+diff -N patches/patch-configure
+--- patches/patch-configure	27 Dec 2012 12:02:33 -0000	1.2
++++ /dev/null	1 Jan 1970 00:00:00 -0000
+@@ -1,56 +0,0 @@
+-$OpenBSD: patch-configure,v 1.2 2012/12/27 12:02:33 gonzalo Exp $
+-Remove -Wredundant-decls which makes a lot of useless noise on
+-OpenBSD because of some problems in system headers.
+-(+ sndio support)
+---- configure.orig	Wed Nov  7 09:46:17 2012
+-+++ configure	Wed Nov  7 19:18:57 2012
+-@@ -5,7 +5,7 @@
+- check_cflags()
+- {
+- 	check_cc_flag -std=gnu99 -pipe -Wall -Wshadow -Wcast-align -Wpointer-arith \
+--		-Wwrite-strings -Wundef -Wmissing-prototypes -Wredundant-decls \
+-+		-Wwrite-strings -Wundef -Wmissing-prototypes \
+- 		-Wextra -Wno-sign-compare -Wformat-security
+- 
+- 	for i in -Wdeclaration-after-statement \
+-@@ -307,6 +307,16 @@ check_sun()
+- 	fi
+- }
+- 
+-+check_sndio()
+-+{
+-+	case `uname -s` in
+-+	OpenBSD)
+-+		check_library SNDIO "" "-lsndio"
+-+		return $?
+-+	esac
+-+	return 1
+-+}
+-+
+- check_waveout()
+- {
+- 	case `uname -s` in
+-@@ -438,6 +448,7 @@ Optional Features: y/n
+-   CONFIG_ARTS     	ARTS                                            [auto]
+-   CONFIG_OSS      	Open Sound System                               [auto]
+-   CONFIG_SUN      	Sun Audio                                       [auto]
+-+  CONFIG_SNDIO    	Sndio                                           [auto]
+-   CONFIG_WAVEOUT  	Windows Wave Out                                [auto]
+-   USE_FALLBACK_IP	Use a specific IP for every unrecognized	[n]
+-                         input format. Currently set to FFMPEG.
+-@@ -499,6 +510,7 @@ check check_ao      CONFIG_AO
+- check check_arts    CONFIG_ARTS
+- check check_oss     CONFIG_OSS
+- check check_sun     CONFIG_SUN
+-+check check_sndio   CONFIG_SNDIO
+- check check_waveout CONFIG_WAVEOUT
+- check check_roar    CONFIG_ROAR
+- 
+-@@ -535,6 +547,6 @@ CFLAGS="${CFLAGS} -DHAVE_CONFIG"
+- 
+- makefile_vars bindir datadir libdir mandir exampledir
+- makefile_vars CONFIG_CDIO CONFIG_FLAC CONFIG_MAD CONFIG_MIKMOD CONFIG_MODPLUG CONFIG_MPC CONFIG_VORBIS CONFIG_WAVPACK CONFIG_WAV CONFIG_MP4 CONFIG_AAC CONFIG_FFMPEG CONFIG_CUE
+--makefile_vars CONFIG_ROAR CONFIG_PULSE CONFIG_ALSA CONFIG_AO CONFIG_ARTS CONFIG_OSS CONFIG_SUN CONFIG_WAVEOUT
+-+makefile_vars CONFIG_ROAR CONFIG_PULSE CONFIG_ALSA CONFIG_AO CONFIG_ARTS CONFIG_OSS CONFIG_SUN CONFIG_SNDIO CONFIG_WAVEOUT
+- 
+- generate_config_mk
+Index: patches/patch-lib_c
+===================================================================
+RCS file: patches/patch-lib_c
+diff -N patches/patch-lib_c
+--- patches/patch-lib_c	27 Dec 2012 12:02:33 -0000	1.1
++++ /dev/null	1 Jan 1970 00:00:00 -0000
+@@ -1,15 +0,0 @@
+-$OpenBSD: patch-lib_c,v 1.1 2012/12/27 12:02:33 gonzalo Exp $
+-
+-Commit 2b3144f69d upstream ("lib: fix segfault caused by player-prev")
+-
+---- lib.c.orig	Wed Nov  7 09:46:17 2012
+-+++ lib.c	Sun Nov 18 19:45:38 2012
+-@@ -271,7 +271,7 @@ static struct tree_track *normal_get_prev(void)
+- 		if (!repeat)
+- 			return NULL;
+- 		/* last track of the album */
+--		return to_tree_track(rb_prev(&CUR_ALBUM->tree_node));
+-+		return album_last_track(CUR_ALBUM);
+- 	}
+- 
+- 	/* not first album of the artist? */
+Index: pkg/DESCR-ffmpeg
+===================================================================
+RCS file: pkg/DESCR-ffmpeg
+diff -N pkg/DESCR-ffmpeg
+--- /dev/null	1 Jan 1970 00:00:00 -0000
++++ pkg/DESCR-ffmpeg	10 Oct 2015 12:57:49 -0000
+@@ -0,0 +1 @@
++ffmpeg input plugin for cmus.
+Index: pkg/DESCR-flac
+===================================================================
+RCS file: pkg/DESCR-flac
+diff -N pkg/DESCR-flac
+--- pkg/DESCR-flac	6 Sep 2011 07:19:29 -0000	1.2
++++ /dev/null	1 Jan 1970 00:00:00 -0000
+@@ -1 +0,0 @@
+-FLAC input plugin for cmus.
+Index: pkg/DESCR-wavpack
+===================================================================
+RCS file: pkg/DESCR-wavpack
+diff -N pkg/DESCR-wavpack
+--- pkg/DESCR-wavpack	6 Sep 2011 07:19:29 -0000	1.2
++++ /dev/null	1 Jan 1970 00:00:00 -0000
+@@ -1 +0,0 @@
+-Wavpack input plugin for cmus.
+Index: pkg/PLIST-ffmpeg
+===================================================================
+RCS file: pkg/PLIST-ffmpeg
+diff -N pkg/PLIST-ffmpeg
+--- /dev/null	1 Jan 1970 00:00:00 -0000
++++ pkg/PLIST-ffmpeg	10 Oct 2015 12:57:49 -0000
+@@ -0,0 +1,3 @@
++@comment $OpenBSD$
++@conflict cmus-<2.7.1
++lib/cmus/ip/ffmpeg.so
+Index: pkg/PLIST-flac
+===================================================================
+RCS file: pkg/PLIST-flac
+diff -N pkg/PLIST-flac
+--- pkg/PLIST-flac	6 Sep 2011 07:10:56 -0000	1.1.1.1
++++ /dev/null	1 Jan 1970 00:00:00 -0000
+@@ -1,2 +0,0 @@
+-@comment $OpenBSD: PLIST-flac,v 1.1.1.1 2011/09/06 07:10:56 landry Exp $
+-lib/cmus/ip/flac.so
+Index: pkg/PLIST-main
+===================================================================
+RCS file: /cvs/ports/audio/cmus/pkg/PLIST-main,v
+retrieving revision 1.2
+diff -u -p -r1.2 PLIST-main
+--- pkg/PLIST-main	27 Dec 2012 12:02:33 -0000	1.2
++++ pkg/PLIST-main	10 Oct 2015 12:57:49 -0000
+@@ -1,13 +1,19 @@
+ @comment $OpenBSD: PLIST-main,v 1.2 2012/12/27 12:02:33 gonzalo Exp $
++@conflict cmus-<2.7.1
++@pkgpath audio/cmus,-flac
++@pkgpath audio/cmus,-wavpack
+ @bin bin/cmus
+ @bin bin/cmus-remote
+ lib/cmus/
+ lib/cmus/ip/
+ lib/cmus/ip/cdio.so
+ lib/cmus/ip/cue.so
++lib/cmus/ip/flac.so
+ lib/cmus/ip/mad.so
++lib/cmus/ip/opus.so
+ lib/cmus/ip/vorbis.so
+ lib/cmus/ip/wav.so
++lib/cmus/ip/wavpack.so
+ lib/cmus/op/
+ lib/cmus/op/sndio.so
+ @man man/man1/cmus-remote.1
+@@ -19,7 +25,10 @@ share/cmus/default.theme
+ share/cmus/gray-88.theme
+ share/cmus/green-mono-88.theme
+ share/cmus/green.theme
++share/cmus/night.theme
+ share/cmus/rc
++share/cmus/solarized-dark.theme
++share/cmus/solarized-light.theme
+ share/cmus/xterm-white.theme
+ share/cmus/zenburn.theme
+ share/examples/cmus/
+Index: pkg/PLIST-wavpack
+===================================================================
+RCS file: pkg/PLIST-wavpack
+diff -N pkg/PLIST-wavpack
+--- pkg/PLIST-wavpack	6 Sep 2011 07:10:56 -0000	1.1.1.1
++++ /dev/null	1 Jan 1970 00:00:00 -0000
+@@ -1,2 +0,0 @@
+-@comment $OpenBSD: PLIST-wavpack,v 1.1.1.1 2011/09/06 07:10:56 landry Exp $
+-lib/cmus/ip/wavpack.so
+

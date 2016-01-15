@@ -1,0 +1,32 @@
+Index: Makefile
+===================================================================
+RCS file: /cvs/ports/devel/quirks/Makefile,v
+retrieving revision 1.301
+diff -u -p -r1.301 Makefile
+--- Makefile	8 Oct 2015 08:03:25 -0000	1.301
++++ Makefile	10 Oct 2015 13:08:18 -0000
+@@ -5,7 +5,7 @@ CATEGORIES =	devel databases
+ DISTFILES =
+ 
+ # API.rev
+-PKGNAME =	quirks-2.146
++PKGNAME =	quirks-2.147
+ PKG_ARCH =	*
+ MAINTAINER =	Marc Espie <espie@openbsd.org>
+ 
+Index: files/Quirks.pm
+===================================================================
+RCS file: /cvs/ports/devel/quirks/files/Quirks.pm,v
+retrieving revision 1.311
+diff -u -p -r1.311 Quirks.pm
+--- files/Quirks.pm	8 Oct 2015 08:03:25 -0000	1.311
++++ files/Quirks.pm	10 Oct 2015 13:08:18 -0000
+@@ -381,6 +381,8 @@ my $stem_extensions = {
+ 	'py-nmap' => 'py3-nmap',
+ 	'pudb' => 'py-pudb',
+ 	'openexr-ctl' => 'ctl',
++	'cmus-flac' => 'cmus',
++	'cmus-wavpack' => 'cmus',
+ };
+ 
+ # reasons for obsolete packages
