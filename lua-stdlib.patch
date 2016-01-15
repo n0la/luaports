@@ -4,8 +4,8 @@ RCS file: /cvs/ports/devel/luastdlib/Makefile,v
 retrieving revision 1.12
 diff -u -p -u -r1.12 Makefile
 --- Makefile	11 Mar 2013 10:50:11 -0000	1.12
-+++ Makefile	20 Mar 2015 12:52:13 -0000
-@@ -2,27 +2,30 @@
++++ Makefile	15 Jan 2016 15:00:36 -0000
+@@ -2,27 +2,29 @@
  
  PKG_ARCH =      *
  
@@ -19,12 +19,11 @@ diff -u -p -u -r1.12 Makefile
 -HOMEPAGE=	http://luaforge.net/projects/stdlib/
 -EXTRACT_SUFX=	.zip
 +COMMENT =	lua library of common programming tasks
-+V =		41.1.1
++V =		41.2.0
 +
 +GH_ACCOUNT =	lua-stdlib
 +GH_PROJECT =	lua-stdlib
 +GH_TAGNAME = 	release-v${V}
-+GH_COMMIT = 	3544b627852125a7bd96a21b7b1a3a647372bdaa
 +
 +DISTNAME =	${GH_PROJECT:S/-//}-${V}
 +
@@ -61,12 +60,12 @@ RCS file: /cvs/ports/devel/luastdlib/distinfo,v
 retrieving revision 1.4
 diff -u -p -u -r1.4 distinfo
 --- distinfo	18 Jan 2015 03:13:18 -0000	1.4
-+++ distinfo	20 Mar 2015 12:52:13 -0000
++++ distinfo	15 Jan 2016 15:00:36 -0000
 @@ -1,2 +1,2 @@
 -SHA256 (stdlib-20.zip) = DPa43S8P60DviCsQQt5anW2xPQpRaaJMqHq9uWbg+38=
 -SIZE (stdlib-20.zip) = 48827
-+SHA256 (luastdlib-41.1.1.tar.gz) = sVieTBsrD1THpG8pisA5XPhw6z9iccRVIk1RG936Cfo=
-+SIZE (luastdlib-41.1.1.tar.gz) = 391244
++SHA256 (luastdlib-41.2.0.tar.gz) = ydnRHc0uPpVuaX9UVbX2K6rfIz2HJtgFFNBDInPMJ+k=
++SIZE (luastdlib-41.2.0.tar.gz) = 398390
 Index: patches/patch-modules_getopt_lua
 ===================================================================
 RCS file: patches/patch-modules_getopt_lua
@@ -91,7 +90,7 @@ RCS file: /cvs/ports/devel/luastdlib/pkg/PLIST,v
 retrieving revision 1.5
 diff -u -p -u -r1.5 PLIST
 --- pkg/PLIST	15 May 2012 15:16:29 -0000	1.5
-+++ pkg/PLIST	20 Mar 2015 12:52:13 -0000
++++ pkg/PLIST	15 Jan 2016 15:00:36 -0000
 @@ -1,44 +1,44 @@
  @comment $OpenBSD: PLIST,v 1.5 2012/05/15 15:16:29 jasper Exp $
  share/doc/${FULLPKGNAME}/
