@@ -18,11 +18,8 @@ MAINTAINER =	Florian Stinglmayr <florian@n0la.org>
 #MIT
 PERMIT_PACKAGE_CDROM =	Yes
 
-# "make port-lib-depends-check" can help
 WANTLIB =		${MODLUA_WANTLIB} m
 
-# Dependencies
-#
 MODULES =		devel/cmake \
 			lang/lua
 
