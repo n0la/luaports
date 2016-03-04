@@ -6,16 +6,16 @@ that is luasucks^W[luarocks](https://luarocks.org/).
 
 ## New ports:
 
-* [cliargs](https://github.com/amireh/lua_cliargs) -- devel/lua-cliargs
-* [dkjson](https://github.com/luadist/dkjson) -- textproc/lua-dkjson
-* [lyaml](https://github.com/gvvaughan/lyaml) -- textproc/lua-lyaml
-* [lua-openbsd](https://github.com/n0la/lua-openbsd) -- devel/lua-openbsd
+* [cliargs](https://github.com/amireh/lua_cliargs) -- ```devel/lua-cliargs```
+* [dkjson](https://github.com/luadist/dkjson) -- ```textproc/lua-dkjson```
+* [lyaml](https://github.com/gvvaughan/lyaml) -- ```textproc/lua-lyaml```
+* [lua-openbsd](https://github.com/n0la/lua-openbsd) -- ```devel/lua-openbsd```
 
 ## Updated ports
 
 These ports have been updated compared to base ports:
 
-* [luastdlib](https://github.com/lua-stdlib/lua-stdlib) -- devel/luastdlib
+* [luastdlib](https://github.com/lua-stdlib/lua-stdlib) -- ```devel/luastdlib```
 
 ## Usage
 
@@ -30,3 +30,8 @@ Then go into a subfolder and do:
 ```
 $ doas make install
 ```
+
+## Licence
+
+All ported software is of course under some sort of licence. This port
+collection however is licenced under the BSD licence.
