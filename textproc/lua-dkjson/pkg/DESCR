@@ -1,0 +1,2 @@
+dkjson is a pure Lua implementation of JSON with a focus on
+portability (hence pure Lua) instead of speed.
