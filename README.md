@@ -10,6 +10,7 @@ that is luasucks^W[luarocks](https://luarocks.org/).
 * [dkjson](https://github.com/luadist/dkjson) -- ```textproc/lua-dkjson```
 * [lyaml](https://github.com/gvvaughan/lyaml) -- ```textproc/lua-lyaml```
 * [lua-openbsd](https://github.com/n0la/lua-openbsd) -- ```devel/lua-openbsd```
+* [say](https://github.com/olivine-labs/say) -- ```devel/lua-say```
 
 ## Updated ports
 

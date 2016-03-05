@@ -1,0 +1,2 @@
+say is a pure Lua library providing key/value storage. It provides
+namespacing, and is thus most commonly used for i18n.
