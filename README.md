@@ -34,6 +34,18 @@ Then go into a subfolder and do:
 $ doas make install
 ```
 
+For Lua 5.2 do:
+
+```
+$ doas env FLAVOR=lua52 make install
+```
+
+And for Lua 5.3 do:
+
+```
+$ doas env FLAVOR=lua53 make install
+```
+
 ## Licence
 
 All ported software is of course under some sort of licence. This port
