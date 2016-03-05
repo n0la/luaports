@@ -1,0 +1,2 @@
+mediator_lua is a simple class that allows you to listen to events by
+subscribing to and sending data to channels.

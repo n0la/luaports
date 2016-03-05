@@ -12,6 +12,7 @@ that is luasucks^W[luarocks](https://luarocks.org/).
 * [lyaml](https://github.com/gvvaughan/lyaml) -- ```textproc/lua-lyaml```
 * [lua-openbsd](https://github.com/n0la/lua-openbsd) -- ```devel/lua-openbsd```
 * [lua-term](https://github.com/hoelzro/lua-term) -- ```devel/lua-term```
+* [mediator_lua](https://github.com/olivine-labs/mediator_lua) -- ```devel/lua-mediator```
 * [say](https://github.com/olivine-labs/say) -- ```devel/lua-say```
 
 ## Updated ports
