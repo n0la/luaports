@@ -6,6 +6,7 @@ that is luasucks^W[luarocks](https://luarocks.org/).
 
 ## New ports:
 
+* [busted](https://github.com/olivine-labs/busted) -- ```devel/lua-busted```
 * [cliargs](https://github.com/amireh/lua_cliargs) -- ```devel/lua-cliargs```
 * [dkjson](https://github.com/luadist/dkjson) -- ```textproc/lua-dkjson```
 * [luassert](https://github.com/olivine-labs/luassert) -- ```devel/luassert```
@@ -20,6 +21,26 @@ that is luasucks^W[luarocks](https://luarocks.org/).
 These ports have been updated compared to base ports:
 
 * [luastdlib](https://github.com/lua-stdlib/lua-stdlib) -- ```devel/luastdlib```
+
+## Notes regarding specific ports
+
+### Generic: Naming
+
+All ports have been renamed to include the ```lua``` prefix. This was done so
+that the OpenBSD ports system can substitute it depending on the Lua flavor
+involved. So if the port didn't have ```lua``` in front of the name this was
+added. For example ```busted``` was renamed ```lua-busted```, and the port for
+```mediator_lua``` was renamed to ```lua-mediator```.
+
+### lua-busted
+
+The various flavours install different stand alone runner scripts properly
+prefixed with the correct Lua flavour. So for example the standard (lua51)
+busted runner is called ```lua51-busted```, the 5.2 runner is called
+```lua52-busted```, and the 5.3 runner is called ```lua53-busted```
+respectively.
+
+The software has been patched to work with lua-cliargs version 3.0 and above.
 
 ## Usage
 

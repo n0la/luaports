@@ -1,0 +1,8 @@
+$OpenBSD$
+--- bin/busted.orig	Sat Mar  5 13:45:14 2016
++++ bin/busted	Sat Mar  5 13:45:21 2016
+@@ -1,3 +1,3 @@
+-#!/usr/bin/env lua
++#!${MODLUA_BIN}
+ -- Busted command-line runner
+ require 'busted.runner'({ standalone = false })
