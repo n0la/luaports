@@ -1,0 +1,2 @@
+luassert is a library for assertions in Lua that provides more
+functionality than the base assertion library of Lua.

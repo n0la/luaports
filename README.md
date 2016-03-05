@@ -8,6 +8,7 @@ that is luasucks^W[luarocks](https://luarocks.org/).
 
 * [cliargs](https://github.com/amireh/lua_cliargs) -- ```devel/lua-cliargs```
 * [dkjson](https://github.com/luadist/dkjson) -- ```textproc/lua-dkjson```
+* [luassert](https://github.com/olivine-labs/luassert) -- ```devel/luassert```
 * [lyaml](https://github.com/gvvaughan/lyaml) -- ```textproc/lua-lyaml```
 * [lua-openbsd](https://github.com/n0la/lua-openbsd) -- ```devel/lua-openbsd```
 * [say](https://github.com/olivine-labs/say) -- ```devel/lua-say```
