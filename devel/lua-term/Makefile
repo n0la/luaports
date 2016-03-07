@@ -2,12 +2,12 @@
 
 COMMENT =	terminal library for Lua
 
-V =		0.03
+V =		0.04
 DISTNAME =	lua-term
-PKGNAME =	lua-term-${V}
+PKGNAME =	${DISTNAME}-${V}
 
 GH_ACCOUNT =	hoelzro
-GH_PROJECT =	lua-term
+GH_PROJECT =	${DISTNAME}
 GH_TAGNAME =	${V}
 
 CATEGORIES =	devel
@@ -23,16 +23,10 @@ MODULES =		lang/lua
 
 NO_TEST =		Yes
 
-#TODO: Fix this once the new version with Makefile comes around
 do-build:
-	cd ${WRKSRC} && \
-		${CC} ${CFLAGS} -I${MODLUA_INCL_DIR} ${MODLUA_LIB} \
-		-L${PREFIX}/lib -shared core.c -o core.so
+	cd ${WRKSRC}; env LUA_VER="${MODLUA_VERSION}" LUA_DIR="${PREFIX}" $(MAKE)
 
 do-install:
-	${INSTALL_DATA_DIR} ${MODLUA_LIBDIR} ${MODLUA_LIBDIR}/term \
-		${MODLUA_DATADIR} ${MODLUA_DATADIR}/term
-	${INSTALL_DATA} ${WRKSRC}/core.so ${MODLUA_LIBDIR}/term
-	${INSTALL_DATA} ${WRKSRC}/term/*.lua ${MODLUA_DATADIR}/term
+	cd ${WRKSRC}; env LUA_VER="${MODLUA_VERSION}" LUA_DIR="${PREFIX}" $(MAKE) install
 
 .include <bsd.port.mk>

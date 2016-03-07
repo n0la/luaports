@@ -1,0 +1,32 @@
+$OpenBSD$
+--- Makefile.orig	Mon Mar  7 18:59:38 2016
++++ Makefile	Mon Mar  7 19:04:27 2016
+@@ -1,11 +1,11 @@
+ #this file builds lua-term \o/
+ 
+-LUA_VER		:= 5.1
+-LUA_DIR		:= /usr
++LUA_VER		?= 5.1
++LUA_DIR		?= /usr
+ LUA_LIBDIR	:= $(LUA_DIR)/lib/lua/$(LUA_VER)/term
+ LUA_INC		:= $(LUA_DIR)/include/lua$(LUA_VER)
+ LUA_SHARE	:= $(LUA_DIR)/share/lua/$(LUA_VER)/term
+-CWARNS          := -Wall -pedantic 
++CWARNS          := -Wall -pedantic
+ CFLAGS 		:= $(CWARNS) -ansi -O3 -I$(LUA_INC) -fPIC
+ LIB_OPTION	:= -shared
+ 
+@@ -27,7 +27,7 @@ $(SONAME):
+ 
+ $(LIBRARY): $(OBJ)
+ 	$(CC) $(CFLAGS) $(LIB_OPTION) -o $(LIBRARY) $(OBJ) -lc
+-		
++
+ install:
+ 	mkdir -p $(LUA_LIBDIR)
+ 	cp $(SONAME) $(LUA_LIBDIR)
+@@ -36,4 +36,3 @@ install:
+ 
+ clean:
+ 	$(RM) $(LIBRARY) $(SONAMEV) $(SONAME) *.o
+-
