@@ -3,8 +3,7 @@
 COMMENT =	pure Lua implementation of JSON
 
 V =		2.5
-DISTNAME =	lua-dkjson
-PKGNAME =	${DISTNAME}-${V}
+DISTNAME =	lua-dkjson-${V}
 
 GH_ACCOUNT =	luadist
 GH_PROJECT =	dkjson
