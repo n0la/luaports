@@ -3,8 +3,8 @@
 COMMENT =	a key value storage for Lua optimised for i18n
 
 V =		1.3-1
-DISTNAME =	lua-say
-PKGNAME =	${DISTNAME}-${V:S/-//}
+DISTNAME =	lua-say-${V}
+PKGNAME =	lua-say-${V:S/-/./g}
 
 GH_ACCOUNT =	olivine-labs
 GH_PROJECT =	say
