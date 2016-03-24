@@ -3,8 +3,7 @@
 COMMENT =	elegant and modern unit testing framework for Lua
 
 V =		2.0.11.0
-DISTNAME =	lua-busted
-PKGNAME =	${DISTNAME}-${V}
+DISTNAME =	lua-busted-${V}
 
 GH_ACCOUNT =	olivine-labs
 GH_PROJECT =	busted
