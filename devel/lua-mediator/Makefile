@@ -3,8 +3,7 @@
 COMMENT =	event subscription/listening framework for Lua
 
 V =		1.1
-DISTNAME =	lua-mediator
-PKGNAME =	${DISTNAME}-${V}
+DISTNAME =	lua-mediator-${V}
 
 GH_ACCOUNT =	olivine-labs
 GH_PROJECT =	mediator_lua
