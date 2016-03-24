@@ -3,11 +3,10 @@
 COMMENT =	assertion library for Lua
 
 V =		1.7.9
-DISTNAME =	luassert
-PKGNAME =	${DISTNAME}-${V}
+DISTNAME =	luassert-${V}
 
 GH_ACCOUNT =	olivine-labs
-GH_PROJECT =	${DISTNAME}
+GH_PROJECT =	luassert
 GH_TAGNAME =	v${V}
 
 CATEGORIES =	devel
