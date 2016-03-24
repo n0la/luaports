@@ -3,11 +3,10 @@
 COMMENT =	terminal library for Lua
 
 V =		0.04
-DISTNAME =	lua-term
-PKGNAME =	${DISTNAME}-${V}
+DISTNAME =	lua-term-${V}
 
 GH_ACCOUNT =	hoelzro
-GH_PROJECT =	${DISTNAME}
+GH_PROJECT =	lua-term
 GH_TAGNAME =	${V}
 
 CATEGORIES =	devel
