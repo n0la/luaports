@@ -2,7 +2,7 @@
 
 luaports is a collection of [OpenBSD](http://openbsd.org) ports regarding
 Lua. All of these ports work, and allow you to avoid the hellish abomination
-that is luasucks^W[luarocks](https://luarocks.org/).
+that is luasucks```^W```[luarocks](https://luarocks.org/).
 
 ## New ports:
 
@@ -41,6 +41,28 @@ busted runner is called ```lua51-busted```, the 5.2 runner is called
 respectively.
 
 The software has been patched to work with lua-cliargs version 3.0 and above.
+
+Please note that lua-busted will not work with lua5.3 unless luasocket is
+patched with ```luasocket-5.3.patch```.
+
+#### Module
+
+lua-busted now comes with a module that can be included to automatically run
+tests for you. Just add lua-busted to your needed modules:
+
+```
+MODULES = devel/lua-busted
+```
+
+This will automatically add lua-busted as a test dependency and run lua-busted
+on a folder in your ```${WRKSRC}``` called ```specl```. If this folder is named
+differently (e.g. ```tests```) just do:
+
+```
+MODBUSTED_SPECDIR = tests
+```
+
+Note that this module does nothing if you have ```NO_TEST``` set to "yes".
 
 ## Usage
 
