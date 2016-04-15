@@ -12,6 +12,7 @@ that is luasucks```^W```[luarocks](https://luarocks.org/).
 * [luassert](https://github.com/olivine-labs/luassert) -- ```devel/luassert```
 * [lyaml](https://github.com/gvvaughan/lyaml) -- ```textproc/lua-lyaml```
 * [lua-openbsd](https://github.com/n0la/lua-openbsd) -- ```devel/lua-openbsd```
+* [lua-sucks](https://github.com/n0la/luasucks) -- ```devel/luasucks```
 * [lua-term](https://github.com/hoelzro/lua-term) -- ```devel/lua-term```
 * [mediator_lua](https://github.com/olivine-labs/mediator_lua) -- ```devel/lua-mediator```
 * [say](https://github.com/olivine-labs/say) -- ```devel/lua-say```
@@ -63,6 +64,31 @@ MODBUSTED_SPECDIR = tests
 ```
 
 Note that this module does nothing if you have ```NO_TEST``` set to "yes".
+
+### luasucks
+
+luasucks is a wrapper script that works with ```luarocks``` rockspecs and the
+OpenBSD port building system. Currently a port include the luasucks module,
+specify the rockspec file and the module will automatically handle the
+installation part of the port. It does so by calling a small Lua script called
+```luasucks``` that reads the rockspec and installs everything found in there
+in the proper place.
+
+If any binary files are found in there they are installed properly prefixed to
+```/usr/local/bin```.
+
+The path to the rockspec file must be set using ```MODLUASUCKS_ROCKSPEC```.
+
+```
+MODULES = lang/lua devel/luasucks
+
+MODLUASUCKS_ROCKSPEC = myproject-dev.rockspec
+```
+
+The script prefixing can be turned off by setting ```MODLUASUCKS_BIN_PREFIX```
+to ```No```. Please note that if your port works with more than one Lua
+version the non-prefixed scripts will collide with each other. Use this only
+if your port only works with one Lua version.
 
 ## Usage
 

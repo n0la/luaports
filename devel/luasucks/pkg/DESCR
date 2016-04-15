@@ -1,0 +1,4 @@
+luarocks is the pip of Lua. But unlike its name would suggest it is a pain to
+use. But why do everything by hand if we already have the luarocks format that
+tells us where files should be installed to? Enter luasucks, a light-weight
+wrapper that combines luarock specifications with the OpenBSD build framework.
