@@ -1,7 +1,5 @@
 # $OpenBSD: Makefile.template,v 1.73 2016/01/11 09:17:22 sthen Exp $
 
-SHARED_ONLY =	Yes
-
 COMMENT =	Lua library for parsing and emitting YAML
 V =		6.0
 
@@ -30,17 +28,8 @@ CONFIGURE_ENV =		CPPFLAGS="-I${PREFIX}/include -L${PREFIX}/lib" \
 
 LIBTOOL_FLAGS +=	--tag=disable-static
 
-AUTOCONF_VERSION =	2.13
-AUTOMAKE_VERSION =	1.4
-
 # Test requires specl, specl requires lyaml.
 NO_TEST =		Yes
-
-pre-configure:
-	@cd ${WRKSRC} && \
-		AUTOCONF_VERSION=${AUTOCONF_VERSION} \
-		AUTOMAKE_VERSION=${AUTOMAKE_VERSION} \
-		autoreconf -i
 
 do-install:
 	${INSTALL_DATA_DIR} ${MODLUA_LIBDIR} ${MODLUA_DATADIR}/lyaml
