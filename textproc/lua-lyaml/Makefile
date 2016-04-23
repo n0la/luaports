@@ -1,15 +1,13 @@
 # $OpenBSD: Makefile.template,v 1.73 2016/01/11 09:17:22 sthen Exp $
 
 COMMENT =	Lua library for parsing and emitting YAML
-V =		6.0
+V =		v6.0
 
-DISTNAME =	lua-${GH_PROJECT}
-PKGNAME =	${DISTNAME}-${V}
-WRKDIST =	${WRKDIR}/${GH_PROJECT}-${GH_TAGNAME}
+DISTNAME =	lua-yaml-${V}
 
 GH_ACCOUNT =	gvvaughan
 GH_PROJECT =	lyaml
-GH_TAGNAME =	release-v${V}
+GH_TAGNAME =	release-${V}
 
 CATEGORIES =	textproc
 
@@ -18,9 +16,10 @@ MAINTAINER =	Florian Stinglmayr <florian@n0la.org>
 # MIT
 PERMIT_PACKAGE_CDROM =	Yes
 
+WANTLIB =		yaml-0
 MODULES =		lang/lua
 
-BUILD_DEPENDS =		devel/libyaml
+LIB_DEPENDS =		devel/libyaml
 
 CONFIGURE_STYLE =	gnu
 CONFIGURE_ENV =		CPPFLAGS="-I${PREFIX}/include -L${PREFIX}/lib" \
