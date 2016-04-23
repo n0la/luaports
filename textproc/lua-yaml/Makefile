@@ -1,13 +1,13 @@
 # $OpenBSD: Makefile.template,v 1.73 2016/01/11 09:17:22 sthen Exp $
 
 COMMENT =	Lua library for parsing and emitting YAML
-V =		v6.0
+V =		6.0
 
-DISTNAME =	lua-yaml-${V}
+PKGNAME =	lua-yaml-${V}
 
 GH_ACCOUNT =	gvvaughan
 GH_PROJECT =	lyaml
-GH_TAGNAME =	release-${V}
+GH_TAGNAME =	release-v${V}
 
 CATEGORIES =	textproc
 
