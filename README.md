@@ -10,7 +10,7 @@ that is luasucks```^W```[luarocks](https://luarocks.org/).
 * [cliargs](https://github.com/amireh/lua_cliargs) -- ```devel/lua-cliargs```
 * [dkjson](https://github.com/luadist/dkjson) -- ```textproc/lua-dkjson```
 * [luassert](https://github.com/olivine-labs/luassert) -- ```devel/luassert```
-* [lyaml](https://github.com/gvvaughan/lyaml) -- ```textproc/lua-yaml```
+* ~~[lyaml](https://github.com/gvvaughan/lyaml) -- ```textproc/lua-yaml```~~ - now in ports [[1]](https://marc.info/?l=openbsd-ports-cvs&m=146146548111278&w=2)
 * [lua-openbsd](https://github.com/n0la/lua-openbsd) -- ```devel/lua-openbsd```
 * [lua-sucks](https://github.com/n0la/luasucks) -- ```devel/luasucks```
 * [lua-term](https://github.com/hoelzro/lua-term) -- ```devel/lua-term```
