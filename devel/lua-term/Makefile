@@ -2,7 +2,7 @@
 
 COMMENT =	terminal library for Lua
 
-V =		0.04
+V =		0.07
 DISTNAME =	lua-term-${V}
 
 GH_ACCOUNT =	hoelzro
