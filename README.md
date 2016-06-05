@@ -75,7 +75,7 @@ installation part of the port. It does so by calling a small Lua script called
 in the proper place.
 
 If any binary files are found in there they are installed properly prefixed to
-```/usr/local/bin```.
+```/usr/local/bin``` .
 
 The path to the rockspec file must be set using ```MODLUASUCKS_ROCKSPEC```.
 
