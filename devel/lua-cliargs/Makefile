@@ -3,7 +3,6 @@
 COMMENT =	command line parser for lua
 
 V =		3.0-1
-DISTNAME =	lua-cliargs-${V}
 PKGNAME = 	lua-cliargs-${V:S/-/./g}
 
 GH_ACCOUNT =	amireh
@@ -12,15 +11,15 @@ GH_TAGNAME =	v${V}
 
 CATEGORIES =	devel
 
-MAINTAINER =		Florian Stinglmayr <florian@n0la.org>
+MAINTAINER =	Florian Stinglmayr <florian@n0la.org>
 
 #MIT
 PERMIT_PACKAGE_CDROM =	Yes
 
 MODULES =	lang/lua
 
-NO_BUILD =		Yes
-NO_TEST =		Yes
+NO_BUILD =	Yes
+NO_TEST =	Yes
 
 do-install:
 	${INSTALL_DATA_DIR} ${MODLUA_DATADIR} ${MODLUA_DATADIR}/cliargs ${MODLUA_DATADIR}/cliargs/utils
