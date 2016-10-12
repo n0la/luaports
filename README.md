@@ -7,7 +7,7 @@ that is luasucks```^W```[luarocks](https://luarocks.org/).
 ## New ports:
 
 * [busted](https://github.com/olivine-labs/busted) -- ```devel/lua-busted```
-~~* [cliargs](https://github.com/amireh/lua_cliargs) -- ```devel/lua-cliargs```~~ - now in [ports](https://marc.info/?l=openbsd-ports&m=147628380011289&w=2)
+* ~~[cliargs](https://github.com/amireh/lua_cliargs) -- ```devel/lua-cliargs```~~ - now in [ports](https://marc.info/?l=openbsd-ports&m=147628380011289&w=2)
 * [dkjson](https://github.com/luadist/dkjson) -- ```textproc/lua-dkjson```
 * [luassert](https://github.com/olivine-labs/luassert) -- ```devel/luassert```
 * ~~[lyaml](https://github.com/gvvaughan/lyaml) -- ```textproc/lua-yaml```~~ - now in [ports](https://marc.info/?l=openbsd-ports-cvs&m=146146548111278&w=2)
