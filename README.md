@@ -7,13 +7,13 @@ that is luasucks```^W```[luarocks](https://luarocks.org/).
 ## New ports:
 
 * [busted](https://github.com/olivine-labs/busted) -- ```devel/lua-busted```
-* [cliargs](https://github.com/amireh/lua_cliargs) -- ```devel/lua-cliargs```
+~~* [cliargs](https://github.com/amireh/lua_cliargs) -- ```devel/lua-cliargs```~~ - now in [ports](https://marc.info/?l=openbsd-ports&m=147628380011289&w=2)
 * [dkjson](https://github.com/luadist/dkjson) -- ```textproc/lua-dkjson```
 * [luassert](https://github.com/olivine-labs/luassert) -- ```devel/luassert```
-* ~~[lyaml](https://github.com/gvvaughan/lyaml) -- ```textproc/lua-yaml```~~ - now in ports [[1]](https://marc.info/?l=openbsd-ports-cvs&m=146146548111278&w=2)
+* ~~[lyaml](https://github.com/gvvaughan/lyaml) -- ```textproc/lua-yaml```~~ - now in [ports](https://marc.info/?l=openbsd-ports-cvs&m=146146548111278&w=2)
 * [lua-openbsd](https://github.com/n0la/lua-openbsd) -- ```devel/lua-openbsd```
 * [lua-sucks](https://github.com/n0la/luasucks) -- ```devel/luasucks```
-* ~~[lua-term](https://github.com/hoelzro/lua-term) -- ```devel/lua-term```~~ - now in ports [[1]](https://marc.info/?l=openbsd-ports-cvs&m=146334406426293&w=2)
+* ~~[lua-term](https://github.com/hoelzro/lua-term) -- ```devel/lua-term```~~ - now in [ports](https://marc.info/?l=openbsd-ports-cvs&m=146334406426293&w=2)
 * [mediator_lua](https://github.com/olivine-labs/mediator_lua) -- ```devel/lua-mediator```
 * [say](https://github.com/olivine-labs/say) -- ```devel/lua-say```
 
