@@ -7,12 +7,10 @@ that is luasucks```^W```[luarocks](https://luarocks.org/).
 ## New ports:
 
 * [busted](https://github.com/olivine-labs/busted) -- ```devel/lua-busted```
-* ~~[cliargs](https://github.com/amireh/lua_cliargs) -- ```devel/lua-cliargs```~~ - now in [ports](https://marc.info/?l=openbsd-ports&m=147628380011289&w=2)
 * [dkjson](https://github.com/luadist/dkjson) -- ```textproc/lua-dkjson```
 * [luassert](https://github.com/olivine-labs/luassert) -- ```devel/luassert```
-* ~~[lyaml](https://github.com/gvvaughan/lyaml) -- ```textproc/lua-yaml```~~ - now in [ports](https://marc.info/?l=openbsd-ports-cvs&m=146146548111278&w=2)
+* [luairc](https://github.com/n0la/luairc) -- ```net/luairc``` with patches
 * [lua-openbsd](https://github.com/n0la/lua-openbsd) -- ```devel/lua-openbsd```
-* ~~[lua-term](https://github.com/hoelzro/lua-term) -- ```devel/lua-term```~~ - now in [ports](https://marc.info/?l=openbsd-ports-cvs&m=146334406426293&w=2)
 * [mediator_lua](https://github.com/olivine-labs/mediator_lua) -- ```devel/lua-mediator```
 * [say](https://github.com/olivine-labs/say) -- ```devel/lua-say```
 
@@ -72,6 +70,8 @@ Check out the repository and update your ```PORTSDIR_PATH```:
 $ export PORTSDIR_PATH=~/where/ever/luaports/:/usr/ports:/usr/ports/mystuff
 ```
 
+You can make this setting permanent in ```/etc/mk.conf```.
+
 Then go into a subfolder and do:
 
 ```
@@ -81,13 +81,13 @@ $ doas make install
 For Lua 5.2 do:
 
 ```
-$ doas env FLAVOR=lua52 make install
+$ doas env MODLUA_VERSION=5.2 make install
 ```
 
 And for Lua 5.3 do:
 
 ```
-$ doas env FLAVOR=lua53 make install
+$ doas env MODLUA_VERSION=5.3 make install
 ```
 
 ## Licence

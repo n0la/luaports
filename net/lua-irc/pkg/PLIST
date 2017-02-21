@@ -1,0 +1,8 @@
+@comment $OpenBSD$
+share/lua/${MODLUA_VERSION}/irc/
+share/lua/${MODLUA_VERSION}/irc/asyncoperations.lua
+share/lua/${MODLUA_VERSION}/irc/handlers.lua
+share/lua/${MODLUA_VERSION}/irc/init.lua
+share/lua/${MODLUA_VERSION}/irc/messages.lua
+share/lua/${MODLUA_VERSION}/irc/set.lua
+share/lua/${MODLUA_VERSION}/irc/util.lua
