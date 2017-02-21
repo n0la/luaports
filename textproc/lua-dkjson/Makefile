@@ -3,7 +3,7 @@
 COMMENT =	pure Lua implementation of JSON
 
 V =		2.5
-DISTNAME =	lua-dkjson-${V}
+PKGNAME =	lua-dkjson-${V}
 
 GH_ACCOUNT =	luadist
 GH_PROJECT =	dkjson
@@ -11,7 +11,7 @@ GH_TAGNAME =	${V}
 
 CATEGORIES =	textproc
 
-MAINTAINER =		Florian Stinglmayr <florian@n0la.org>
+MAINTAINER =	Florian Stinglmayr <florian@n0la.org>
 
 #MIT
 PERMIT_PACKAGE_CDROM =	Yes
