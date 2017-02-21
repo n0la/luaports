@@ -3,7 +3,7 @@
 COMMENT =	elegant and modern unit testing framework for Lua
 
 V =		2.0.11.0
-DISTNAME =	lua-busted-${V}
+PKGNAME =	lua-busted-${V}
 
 GH_ACCOUNT =	olivine-labs
 GH_PROJECT =	busted
@@ -12,7 +12,7 @@ GH_TAGNAME =	v2.0.rc11-0
 
 CATEGORIES =	devel
 
-MAINTAINER =		Florian Stinglmayr <florian@n0la.org>
+MAINTAINER =	Florian Stinglmayr <florian@n0la.org>
 
 #MIT
 PERMIT_PACKAGE_CDROM =	Yes
