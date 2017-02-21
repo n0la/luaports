@@ -1,7 +1,7 @@
 # $OpenBSD: Makefile.template,v 1.75 2016/03/20 17:19:49 naddy Exp $
 
 COMMENT =	irc library for Lua
-V =		1.1
+V =		1.2
 
 PKGNAME =	luairc-${V}
 
