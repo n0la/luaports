@@ -1,0 +1,2 @@
+ansicolors is a Lua module for producing colour terminal
+output. It has largely been superseded by lua-term.
