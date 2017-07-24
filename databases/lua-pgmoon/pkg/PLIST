@@ -1,0 +1,10 @@
+@comment $OpenBSD$
+share/lua/${MODLUA_VERSION}/pgmoon/
+share/lua/${MODLUA_VERSION}/pgmoon/arrays.lua
+share/lua/${MODLUA_VERSION}/pgmoon/cqueues.lua
+share/lua/${MODLUA_VERSION}/pgmoon/crypto.lua
+share/lua/${MODLUA_VERSION}/pgmoon/hstore.lua
+share/lua/${MODLUA_VERSION}/pgmoon/init.lua
+share/lua/${MODLUA_VERSION}/pgmoon/json.lua
+share/lua/${MODLUA_VERSION}/pgmoon/socket.lua
+share/lua/${MODLUA_VERSION}/pgmoon/util.lua
