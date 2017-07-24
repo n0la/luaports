@@ -18,6 +18,9 @@ MAINTAINER =		Florian Stinglmayr <florian@openbsd.org>
 # MIT
 PERMIT_PACKAGE_CDROM =	Yes
 
+FLAVORS =	lua52 lua53
+FLAVOR ?=
+
 WANTLIB =		 crypto m pthread ssl ${MODLUA_WANTLIB}
 
 MODULES =		lang/lua

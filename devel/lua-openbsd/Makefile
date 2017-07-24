@@ -18,6 +18,9 @@ MAINTAINER =	Florian Stinglmayr <florian@n0la.org>
 #MIT
 PERMIT_PACKAGE_CDROM =	Yes
 
+FLAVORS =	lua52 lua53
+FLAVOR ?=
+
 WANTLIB =		${MODLUA_WANTLIB} m
 
 MODULES =		devel/cmake \

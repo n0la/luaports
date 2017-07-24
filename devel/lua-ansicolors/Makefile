@@ -17,6 +17,9 @@ MAINTAINER =		Florian Stinglmayr <florian@n0la.org>
 # MIT
 PERMIT_PACKAGE_CDROM =	Yes
 
+FLAVORS =	lua52 lua53
+FLAVOR ?=
+
 MODULES =		lang/lua
 
 NO_BUILD =		Yes
