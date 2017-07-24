@@ -1,0 +1,27 @@
+@comment $OpenBSD$
+lib/lua/${MODLUA_VERSION}/_openssl.so
+share/lua/${MODLUA_VERSION}/openssl/
+share/lua/${MODLUA_VERSION}/openssl.lua
+share/lua/${MODLUA_VERSION}/openssl/auxlib.lua
+share/lua/${MODLUA_VERSION}/openssl/bignum.lua
+share/lua/${MODLUA_VERSION}/openssl/cipher.lua
+share/lua/${MODLUA_VERSION}/openssl/des.lua
+share/lua/${MODLUA_VERSION}/openssl/digest.lua
+share/lua/${MODLUA_VERSION}/openssl/hmac.lua
+share/lua/${MODLUA_VERSION}/openssl/pkcs12.lua
+share/lua/${MODLUA_VERSION}/openssl/pkey.lua
+share/lua/${MODLUA_VERSION}/openssl/pubkey.lua
+share/lua/${MODLUA_VERSION}/openssl/rand.lua
+share/lua/${MODLUA_VERSION}/openssl/ssl/
+share/lua/${MODLUA_VERSION}/openssl/ssl.lua
+share/lua/${MODLUA_VERSION}/openssl/ssl/context.lua
+share/lua/${MODLUA_VERSION}/openssl/x509/
+share/lua/${MODLUA_VERSION}/openssl/x509.lua
+share/lua/${MODLUA_VERSION}/openssl/x509/altname.lua
+share/lua/${MODLUA_VERSION}/openssl/x509/chain.lua
+share/lua/${MODLUA_VERSION}/openssl/x509/crl.lua
+share/lua/${MODLUA_VERSION}/openssl/x509/csr.lua
+share/lua/${MODLUA_VERSION}/openssl/x509/extension.lua
+share/lua/${MODLUA_VERSION}/openssl/x509/name.lua
+share/lua/${MODLUA_VERSION}/openssl/x509/store.lua
+share/lua/${MODLUA_VERSION}/openssl/x509/verify_param.lua
