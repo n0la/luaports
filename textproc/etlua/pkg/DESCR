@@ -1,0 +1,2 @@
+etlua is a library that allows the parsing and compilation of
+text templates with embedded Lua code.
