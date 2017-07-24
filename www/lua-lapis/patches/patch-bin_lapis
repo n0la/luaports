@@ -1,0 +1,11 @@
+$OpenBSD$
+
+Index: bin/lapis
+--- bin/lapis.orig
++++ bin/lapis
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env lua
++#!${MODLUA_BIN}
+ 
+ local cmd = require "lapis.cmd.actions"
+ cmd.execute(arg)
