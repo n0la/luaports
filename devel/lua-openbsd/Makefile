@@ -1,15 +1,10 @@
 # $OpenBSD: Makefile.template,v 1.73 2016/01/11 09:17:22 sthen Exp $
 
-SHARED_ONLY =	Yes
-
 COMMENT =	lua bindings for OpenBSD functions
 
-V =		0.1
+V =		v0.2
 DISTNAME =	lua-openbsd-${V}
-
-GH_ACCOUNT =	n0la
-GH_PROJECT =	lua-openbsd
-GH_TAGNAME =	v${V}
+PKGNAME =	${DISTNAME:S/v//}
 
 CATEGORIES =	devel
 
@@ -22,6 +17,10 @@ FLAVORS =	lua52 lua53
 FLAVOR ?=
 
 WANTLIB =		${MODLUA_WANTLIB} m
+
+MASTER_SITES =		https://github.com/n0la/lua-openbsd/releases/download/${V}/
+
+WRKSRC =		${WRKDIR}/lua-openbsd
 
 MODULES =		devel/cmake \
 			lang/lua
