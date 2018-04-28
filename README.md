@@ -10,7 +10,6 @@ that is luasucks```^W```[luarocks](https://luarocks.org/).
 * [dkjson](https://github.com/luadist/dkjson) -- ```textproc/lua-dkjson```
 * [luassert](https://github.com/olivine-labs/luassert) -- ```devel/luassert```
 * [luairc](https://github.com/n0la/luairc) -- ```net/luairc``` with patches
-* [lua-openbsd](https://github.com/n0la/lua-openbsd) -- ```devel/lua-openbsd```
 * [mediator_lua](https://github.com/olivine-labs/mediator_lua) -- ```devel/lua-mediator```
 * [say](https://github.com/olivine-labs/say) -- ```devel/lua-say```
 
