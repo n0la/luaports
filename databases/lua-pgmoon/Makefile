@@ -2,7 +2,7 @@
 
 COMMENT =	pure Lua postgres driver
 
-V =		1.8.0
+V =		1.9.0
 DISTNAME =	lua-pgmoon-${V}
 
 GH_ACCOUNT =	leafo
